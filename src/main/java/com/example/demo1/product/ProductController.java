@@ -16,20 +16,25 @@ public class ProductController {
     private ProductService productService;//아래에 빨간줄 사라진다*변수 선언해야 한다
 
     //상품 조회 하는 메서드
-    @RequestMapping(value = "/products", method= RequestMethod.GET)//이런 url(http://localhost:8080 이 생략 되어 있다)이 날라오고 이런 목적(GET)으로 오면 아래 메서드 실행할거야
-    public String findProduct() {
+    @RequestMapping(value = "/products/{id}", method= RequestMethod.GET)//이런 url(http://localhost:8080 이 생략 되어 있다)이 날라오고 이런 목적(GET)으로 오면 아래 메서드 실행할거야
+    public Product findProduct(@PathVariable("id") int id) {
 
       //  ProductService productService =new ProductService();//서비스에게일을시키기 위해 객체 생셩 하고 서비스에가서 findProduct메서드 생성하기//이부분은 스프링 빈으로 등록되엇 자동 주입하면 필요 없게 됨
-        System.out.println("GET");
-        return productService.findProduct();//서비스에게 조회좀해줘*
+        System.out.println(id);
+        return productService.findProduct(id);//서비스에게 조회좀해줘*
     }
         //상품등록
-        @RequestMapping(value = "/products", method = RequestMethod.POST)
-                public void saveProduct(@RequestParam(value = "name") String productName){
-        //localhost:8080/products?name=___ =>productName
-            System.out.println("POST");
-            productService.saveProduct(productName);
+//        @RequestMapping(value = "/products", method = RequestMethod.POST)
+//                public void saveProduct(@RequestParam(value = "name") String productName){
+//        //localhost:8080/products?name=___ =>productName
+//            System.out.println("POST");
+//            productService.saveProduct(productName);
 
+            @RequestMapping(value = "/products", method = RequestMethod.POST)
+            public void saveProduct(@RequestBody Product product){
+                //localhost:8080/products?name=___ =>productName
+                System.out.println("POST");
+                productService.saveProduct(product);
 
 
 
