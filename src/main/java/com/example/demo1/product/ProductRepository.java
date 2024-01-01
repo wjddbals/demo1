@@ -17,8 +17,8 @@ public class ProductRepository {
         return db.get(1);//노트북은 1번에 담겨 있어서
     }
 
-    public void save(){
-        db.put(id++,"notebook");
+    public void save(String productName){
+        db.put(id++,productName);
     }
 
 
